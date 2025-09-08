@@ -1,9 +1,17 @@
-## Backend
+# Task & Comment API (MERN Backend)
 
-1. Create a python venv and install:
-   ```bash
-   cd backend
-   python -m venv .venv
-   source .venv/bin/activate   # Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+This project provides a backend API for managing **Tasks** and **Comments** using Node.js, Express, and MongoDB.
+
+---
+
+## Features
+
+- CRUD operations for **Tasks**
+- CRUD operations for **Comments**
+- MongoDB database integration
+- RESTful API structure
+- Jest + Supertest ready for testing
+
+---
+
+## Project Structure
