@@ -1,0 +1,9 @@
+## Backend
+
+1. Create a python venv and install:
+   ```bash
+   cd backend
+   python -m venv .venv
+   source .venv/bin/activate   # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
