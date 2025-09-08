@@ -9,24 +9,24 @@ function App() {
   const [commentText, setCommentText] = useState({});
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState({});
-
+  const VITE_API_URL="https://task-kf8g.onrender.com"
   const fetchTasks = async () => {
-    const res = await axios.get("http://localhost:5000/api/tasks");
+    const res = await axios.get(`${VITE_API_URL}/api/tasks`);
     setTasks(res.data);
   };
 
   const fetchComments = async (taskId) => {
-    const res = await axios.get(`http://localhost:5000/api/comments/${taskId}`);
+    const res = await axios.get(`${VITE_API_URL}/api/comments/${taskId}`);
     setComments((prev) => ({ ...prev, [taskId]: res.data }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editingTaskId) {
-      await axios.put(`http://localhost:5000/api/tasks/${editingTaskId}`, form);
+      await axios.put(`${VITE_API_URL}/api/tasks/${editingTaskId}`, form);
       setEditingTaskId(null);
     } else {
-      await axios.post("http://localhost:5000/api/tasks", form);
+      await axios.post(`${VITE_API_URL}/api/tasks`, form);
     }
     setForm({ title: "", description: "" });
     fetchTasks();
@@ -38,7 +38,7 @@ function App() {
   };
 
   const handleDeleteTask = async (id) => {
-    await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+    await axios.delete(`${VITE_API_URL}/api/tasks/${id}`);
     fetchTasks();
   };
 
@@ -46,12 +46,12 @@ function App() {
     if (!commentText[taskId]) return;
     if (editingCommentId[taskId]) {
       await axios.put(
-        `http://localhost:5000/api/comments/${editingCommentId[taskId]}`,
+        `${VITE_API_URL}/api/comments/${editingCommentId[taskId]}`,
         { text: commentText[taskId] }
       );
       setEditingCommentId((prev) => ({ ...prev, [taskId]: null }));
     } else {
-      await axios.post("http://localhost:5000/api/comments", { taskId, text: commentText[taskId] });
+      await axios.post(`${VITE_API_URL}/api/comments`, { taskId, text: commentText[taskId] });
     }
     setCommentText((prev) => ({ ...prev, [taskId]: "" }));
     fetchComments(taskId);
@@ -63,7 +63,7 @@ function App() {
   };
 
   const handleDeleteComment = async (taskId, commentId) => {
-    await axios.delete(`http://localhost:5000/api/comments/${commentId}`);
+    await axios.delete(`${VITE_API_URL}/api/comments/${commentId}`);
     fetchComments(taskId);
   };
 
